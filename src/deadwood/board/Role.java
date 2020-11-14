@@ -37,8 +37,4 @@ public class Role {
     public boolean hasPlayer() {
         return player != null;
     }
-
-    public String toString() {
-        return String.format("Role\n\tName: %s\tLine: %s\tLevel: %d", name, line, requiredRank);
-    }
 }

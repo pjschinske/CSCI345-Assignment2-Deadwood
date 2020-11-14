@@ -100,7 +100,6 @@ public class ParseXML {
                             NodeList partChildren = part.getChildNodes();
                             for (int l = 0; l < parts.getLength(); l++) {
                                 Node partChild = partChildren.item(l);
-                                System.out.println(partChild.getNodeName());
                                 if (partChild.getNodeName().equals("line")) {
                                     String line = partChildren.item(l).getTextContent();
                                     roles.add(new Role(roleName, line, roleLevel));
