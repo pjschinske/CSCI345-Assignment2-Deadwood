@@ -85,6 +85,7 @@ public class Set extends Place {
 
     private void wrap() {
         System.out.println("That's a wrap!");
+        Board.finishScene();
         List<Role> onCardRoles = scene.getRoles();
         for (int i = 0; i < onCardRoles.size(); i++) {
             if (onCardRoles.get(i).hasPlayer()) {
@@ -105,6 +106,7 @@ public class Set extends Place {
                 for (int j = 0; j < onCardRoles.size(); j++) {
                     if (onCardRoles.get(j).hasPlayer()) {
                         Player player = onCardRoles.get(j).getPlayer();
+                        player.clearPracticeChips();
                         Deadwood.bank.payMoney(player, payouts[j]);
                         System.out.println(player.getName() + " got $" + payouts[j]);
                     }
@@ -112,6 +114,7 @@ public class Set extends Place {
                 for (int j = 0; j < roles.size(); j++) {
                     if (roles.get(j).hasPlayer()) {
                         Player player = roles.get(j).getPlayer();
+                        player.clearPracticeChips();
                         Deadwood.bank.payMoney(player, roles.get(j).getRequiredRank());
                         System.out.println(player.getName() + " got $" + roles.get(j).getRequiredRank());
                     }
