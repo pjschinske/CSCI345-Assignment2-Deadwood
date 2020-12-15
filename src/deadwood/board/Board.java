@@ -8,6 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Stores info about the state of the current board.
+ */
 public class Board {
 
     public static Place trailers = new Place("Trailers");
@@ -27,7 +30,7 @@ public class Board {
 
 
     private static Scene[] scenes;
-    static {
+    static { //generates cards
         try {
             scenes = ParseXML.readCardData(ParseXML.getDocFromFile("cards.xml"));
         } catch (ParserConfigurationException e) {
@@ -37,6 +40,10 @@ public class Board {
 
     private static int numOfScenes;
 
+    /**
+     * Creates the board at the beginning of the game.
+     * @throws ParserConfigurationException
+     */
     public static void makeBoard() throws ParserConfigurationException {
         sets.add(mainStreet);
         sets.add(saloon);
@@ -113,6 +120,9 @@ public class Board {
        return --numOfScenes;
     }
 
+    /**
+     * Resets the cards at the end of the day.
+     */
     public static void reset() {
         for (Set set: sets) {
             set.reset();

@@ -53,7 +53,7 @@ public class Deadwood {
                     String input = scanner.next();
                     Place currentLocation = currentPlayer.getCurrentLocation();
                     switch (input) {
-                        case "whoami":
+                        case "whoami": //Lists info about the player
                             if (currentPlayer.getCredits() == 1) {
                                 System.out.printf("The active player is %s. They have $%d, %d credit and a rank of %d.", currentPlayer.getName(), currentPlayer.getMoney(), currentPlayer.getCredits(), currentPlayer.getRank());
                             } else {
@@ -64,10 +64,10 @@ public class Deadwood {
                             }
                             System.out.println();
                             break;
-                        case "end":
+                        case "end": //Preemptively ends the player's turn
                             done = true;
                             break;
-                        case "where":
+                        case "where": //Lists info on the current location of all players
                             for (int k = 0; k < numOfPlayers; k++) {
                                 Player player = players[k];
                                 System.out.printf("%s is at %s", player.getName(), player.getCurrentLocation().getName());
@@ -81,7 +81,7 @@ public class Deadwood {
                                 System.out.println();
                             }
                             break;
-                        case "move":
+                        case "move": //Moves the player to the specified place, if able.
                             List<Place> neighbors = currentLocation.getNeighbors();
                             if (!hasMoved) {
                                 if (scanner.hasNext()) {
@@ -101,7 +101,7 @@ public class Deadwood {
                                 System.out.println("You have already moved this turn.");
                             }
                             break;
-                        case "scene":
+                        case "scene": //Display info on the scene at the current place, if there is one.
                             if (currentLocation instanceof Set) {
                                 Scene currentScene = ((Set) currentLocation).getScene();
                                 System.out.printf("%s scene %d.\n", currentScene.getName(), currentScene.getNumber());
@@ -119,7 +119,7 @@ public class Deadwood {
                                 System.out.println("There are no jobs here.");
                             }
                             break;
-                        case "work":
+                        case "work": //set a player up with a job
                             if (scanner.hasNext()) {
                                 String role = scanner.nextLine().substring(1);
                                 if (currentLocation instanceof Set) {
@@ -154,7 +154,7 @@ public class Deadwood {
                                 }
                             }
                             break;
-                        case "act":
+                        case "act": //Player acts a scene
                             if (currentPlayer.getCurrentLocation() instanceof Set) {
                                 Set currentSet = (Set) currentPlayer.getCurrentLocation();
                                 if (currentPlayer.getRole() != null) {
@@ -167,7 +167,7 @@ public class Deadwood {
                                 System.out.println("You cannot act here, you are not at a set.");
                             }
                             break;
-                        case "rehearse":
+                        case "rehearse": //Player rehearses
                             if (currentLocation instanceof Set) {
                                 ((Set) currentLocation).rehearse(currentPlayer);
                                 done = true;
@@ -175,7 +175,7 @@ public class Deadwood {
                                 System.out.println("You cannot rehearse here, you are not at a set.");
                             }
                             break;
-                        case "upgrade":
+                        case "upgrade": //Upgrades the player to the specified level, if possible
                             if (currentLocation == Board.castingOffice) {
                                 System.out.printf("Your current level is %d.\n", currentPlayer.getRank());
                                 System.out.println("Level 2 will cost 4 dollars or 5 credits.");
@@ -212,7 +212,7 @@ public class Deadwood {
                                 System.out.println("You need to be in the casting office to upgrade your level");
                             }
                             break;
-                        default:
+                        default: //Player inputted an invalid command
                             System.out.println("That is not a valid command.");
                     }
                 }
@@ -220,6 +220,7 @@ public class Deadwood {
 
             Board.reset();
         }
+        //End of the game - display who won.
         System.out.println("That's the end of the game! And now for the scores:");
         int winnerPoints = 0;
         Player winner = null;

@@ -41,6 +41,9 @@ public class ParseXML {
         } // exception handling
     }
 
+    /**
+     * Obtains all info about the cards and creates them.
+     */
     public static Scene[] readCardData(Document d) {
         Element root = d.getDocumentElement();
         NodeList cards = root.getElementsByTagName("card");
@@ -78,6 +81,9 @@ public class ParseXML {
         return scenes;
     }
 
+    /**
+     * Obtains all info about the board and creates it.
+     */
     public static void readBoardData(Document d) {
         Element root = d.getDocumentElement();
         NodeList sets = root.getElementsByTagName("set");

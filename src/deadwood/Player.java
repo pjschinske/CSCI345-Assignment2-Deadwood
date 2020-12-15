@@ -5,6 +5,9 @@ import deadwood.board.Role;
 
 import java.util.Random;
 
+/**
+ * Stores info about a player.
+ */
 public class Player {
 
     private String name;

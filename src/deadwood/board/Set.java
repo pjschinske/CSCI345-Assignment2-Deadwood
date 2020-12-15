@@ -38,9 +38,11 @@ public class Set extends Place {
         player.rehearse(scene.getBudget());
     }
 
+    /**
+     * Contains the logic needed for acting.
+     * @param player
+     */
     public void act(Player player) {
-
-
         int roleIndex = -1;
         for (int i = 0; i < roles.size(); i++) {
             if (roles.get(i).getPlayer() == player) {
@@ -85,6 +87,9 @@ public class Set extends Place {
             wrap();
     }
 
+    /**
+     * Called if a scene wraps.
+     */
     private void wrap() {
         System.out.println("That's a wrap!");
         Board.finishScene();
