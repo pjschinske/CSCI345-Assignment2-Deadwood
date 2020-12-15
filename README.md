@@ -20,3 +20,17 @@ Run with `java deadwood.Deadwood`.
 - rehearse: Player rehearses the role
 - upgrade: if at casting office, allows the user to upgrade to a higher level
 - end: end your turn
+
+### Location Names:
+ - Trailers
+ - Main Street
+ - Saloon
+ - Casting Office
+ - Ranch
+ - Secret Hideout
+ - Bank
+ - Church
+ - Hotel
+ - Train Station
+ - Jail
+ - General Store
