@@ -3,13 +3,14 @@ package deadwood;
 import deadwood.board.*;
 
 import javax.xml.parsers.ParserConfigurationException;
-import java.sql.SQLOutput;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Deadwood {
 
     public static Bank bank = new Bank(Integer.MAX_VALUE);
+    private static Random random = new Random();
 
     public static void main(String[] args) throws ParserConfigurationException {
         Scanner scanner = new Scanner(System.in);
@@ -44,6 +45,7 @@ public class Deadwood {
             //loop through all players
             for (int j = 0; Board.getNumOfScenes() > 1; j++) {
                 Player currentPlayer = players[j % numOfPlayers];
+                System.out.println("It's " + currentPlayer.getName() + "'s turn.");
                 boolean hasMoved = false;
                 boolean done = false;
                 while (!done) {
@@ -128,6 +130,7 @@ public class Deadwood {
                                                 offCardRole.setPlayer(currentPlayer);
                                                 currentPlayer.setRole(offCardRole);
                                                 success = true;
+                                                done = true;
                                             }
                                         }
                                     }
@@ -138,6 +141,7 @@ public class Deadwood {
                                                     onCardRole.setPlayer(currentPlayer);
                                                     currentPlayer.setRole(onCardRole);
                                                     success = true;
+                                                    done = true;
                                                 }
                                             }
                                         }
@@ -155,16 +159,20 @@ public class Deadwood {
                                 Set currentSet = (Set) currentPlayer.getCurrentLocation();
                                 if (currentPlayer.getRole() != null) {
                                     currentSet.act(currentPlayer);
+                                    done = true;
                                 } else {
                                     System.out.println("You are not in a role right now.");
                                 }
                             } else {
-                                System.out.println("You cannot act here.");
+                                System.out.println("You cannot act here, you are not at a set.");
                             }
                             break;
                         case "rehearse":
                             if (currentLocation instanceof Set) {
                                 ((Set) currentLocation).rehearse(currentPlayer);
+                                done = true;
+                            } else {
+                                System.out.println("You cannot rehearse here, you are not at a set.");
                             }
                             break;
                         case "upgrade":
@@ -186,6 +194,7 @@ public class Deadwood {
                                         currentPlayer.setRank(rank);
                                         currentPlayer.payBank(Deadwood.bank, rankToMoney[rank]);
                                         System.out.printf("You paid $%d to become level %d.\n", rankToMoney[rank], currentPlayer.getRank());
+                                        done = true;
                                     } else {
                                         System.out.println("You can't get that level.");
                                     }
@@ -194,6 +203,7 @@ public class Deadwood {
                                         currentPlayer.setRank(rank);
                                         currentPlayer.addCredits(-1 * rankToCredits[rank]);
                                         System.out.printf("You paid %d credits to become level %d.\n", rankToCredits[rank], currentPlayer.getRank());
+                                        done = true;
                                     } else {
                                         System.out.println("You can't get that level.");
                                     }
@@ -201,6 +211,9 @@ public class Deadwood {
                             } else {
                                 System.out.println("You need to be in the casting office to upgrade your level");
                             }
+                            break;
+                        default:
+                            System.out.println("That is not a valid command.");
                     }
                 }
             }
@@ -268,4 +281,5 @@ public class Deadwood {
 
         return players;
     }
+
 }

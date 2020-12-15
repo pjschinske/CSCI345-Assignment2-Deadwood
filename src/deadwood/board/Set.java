@@ -39,6 +39,8 @@ public class Set extends Place {
     }
 
     public void act(Player player) {
+
+
         int roleIndex = -1;
         for (int i = 0; i < roles.size(); i++) {
             if (roles.get(i).getPlayer() == player) {
@@ -111,6 +113,7 @@ public class Set extends Place {
                         System.out.println(player.getName() + " got $" + payouts[j]);
                     }
                 }
+
                 for (int j = 0; j < roles.size(); j++) {
                     if (roles.get(j).hasPlayer()) {
                         Player player = roles.get(j).getPlayer();
